@@ -3,30 +3,28 @@ import numpy as np
 import pandas as pd
 import matplotlib.pyplot as plt
 
-from roller_core import compute
+from roller_core import compute, rho_s, E_steel
 
-from roller_core import compute
 
-from roller_core import compute
 
-from roller_core import compute
 
 
 # ==== Password check (Streamlit Cloud only) ====
-if not st.runtime.exists() or st.runtime.exists():
-    import os as _os
+try:
     _pw = st.secrets.get('viewers', {}).get('password', '')
-    if _pw:
-        if 'authenticated' not in st.session_state:
-            st.session_state.authenticated = False
-        if not st.session_state.authenticated:
-            pwd_input = st.text_input('Password', type='password')
-            if pwd_input == _pw:
-                st.session_state.authenticated = True
-                st.rerun()
-            elif pwd_input:
-                st.error('Wrong password')
-            st.stop()
+except Exception:
+    _pw = ''
+if _pw:
+    if 'authenticated' not in st.session_state:
+        st.session_state.authenticated = False
+    if not st.session_state.authenticated:
+        pwd_input = st.text_input('Password', type='password')
+        if pwd_input == _pw:
+            st.session_state.authenticated = True
+            st.rerun()
+        elif pwd_input:
+            st.error('Wrong password')
+        st.stop()
 
 st.set_page_config(page_title="Roller Compaction", layout="wide")
 st.title("Roller Compaction Parametric Study")
