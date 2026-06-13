@@ -1,0 +1,10 @@
+__pycache__/
+*.pyc
+.venv/
+dist/
+build/
+*.spec
+_streamlit_state/
+ANSYS配置说明.md
+仿真计算要求.docx
+~.docx
